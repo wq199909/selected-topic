@@ -20,16 +20,17 @@ export default {
             ]
         }
     },
-    mounted(){
-        let hash = window.location.hash.match(/\/[\w]*$/)[0];
-        for(let item of this.list){
-            if(hash.indexOf(item.hash) != -1){
-                item.active = true;
-            }else{
-                item.active = false;
-            }
-        }
-    },
+    // mounted(){
+    //     let hash = window.location.hash.match(/\/[\w]*$/)[0];
+    //     console.log(hash)
+    //     for(let item of this.list){
+    //         if(hash.indexOf(item.hash) != -1){
+    //             item.active = true;
+    //         }else{
+    //             item.active = false;
+    //         }
+    //     }
+    // },
     methods: {
         changeIndex(e){
             if(e.target.tagName === 'A'){
