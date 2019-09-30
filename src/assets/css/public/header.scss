@@ -8,10 +8,9 @@
 .header{
     height: 100%;
     width: 100%;
-    display: flex;
     .logo{
-        z-index: 99;
         img{
+            position: relative;
             transform: translate(50%,50%);
             z-index: 999;
             border-radius: 30px;

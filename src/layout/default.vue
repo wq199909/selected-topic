@@ -4,9 +4,13 @@
         <my-header />
     </el-header>
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <my-aside />
+      </el-aside>
       <el-container>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
         <el-footer>@汪清 洪紫阳 李家成</el-footer>
       </el-container>
     </el-container>
@@ -15,9 +19,11 @@
 
 <script>
 import myHeader from '@/components/header/header'
+import myAside from '@/components/aside/aside'
 export default {
     components:{
-        myHeader
+        myHeader,
+        myAside
     }
 };
 </script>

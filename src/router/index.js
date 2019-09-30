@@ -8,7 +8,25 @@ export default new Router({
     {
       path: '/',
       name: 'default',
-      component: () => import('@/layout/default')
+      component: () => import('@/layout/default'),
+      redirect: '/index',
+      children: [
+        {
+          path: '/index',
+          name: 'index',
+          component: () => import('@/page/index')
+        },
+        {
+          path: '/group',
+          name: 'group',
+          component: () => import('@/page/group')
+        },
+        {
+          path: '/suggest',
+          name: 'suggest',
+          component: () => import('@/page/suggest')
+        }
+      ]
     }
   ]
 })

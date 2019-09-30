@@ -1,0 +1,32 @@
+.index{
+    height: 100%;
+    .el-row{
+        text-align: center;
+        &:nth-child(1),
+        &:nth-child(3){
+            height: 40px;
+        }
+        &:nth-child(2){
+            height: calc(100% - 80px);
+            ul{
+                height: calc(100% - 20px);
+                padding: 10px;
+                li{
+                    height: 10%;
+                    border-bottom: 1px solid #aaa;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    &:hover{
+                        background-color: rgba(204, 204, 204, .5);
+                    }
+                    a{
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+}
