@@ -1,0 +1,48 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body *{
+    margin: 0;
+    padding: 0;
+}
+#app{
+    height: 100%;
+}
+.el-container{
+    height: 100%;
+}
+.el-header{
+    background: linear-gradient(to right, #000, #ddd);
+    padding: 0 !important;
+}
+.el-aside::after,
+.el-header::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.3/dist/img/bs-docs-masthead-pattern.png') repeat 50%;
+}
+.el-aside{
+    background-color: #000;
+}
+.el-main{
+    height: calc(100% - 120px);
+}
+.el-footer{
+    height: 20px !important;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: right;
+    background: linear-gradient(to right, #000, #ddd)
+}
+@media (max-width: 500px){
+    .el-aside{
+        position: absolute;
+    }
+}
