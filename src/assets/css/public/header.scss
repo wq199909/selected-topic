@@ -47,6 +47,9 @@
         right: 30px;
         z-index: 999;
         cursor: pointer !important;
+        &.login-after{
+            width: 7em;
+        }
     }
 }
 @media (max-width:500px){
