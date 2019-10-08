@@ -6,7 +6,7 @@
     <el-row>
       <ul>
         <li v-for="item in topicList" :key="item.id">
-          <router-link :to="'/topic-'+item.id">{{item.msg}}</router-link>
+          <router-link :to="'/topic-'+item.id">{{item.name}}</router-link>
         </li>
       </ul>
     </el-row>
@@ -16,7 +16,7 @@
           @current-change="changePage"
           :current-page.sync="currentPage"
           layout="prev, pager, next"
-          :total="50"
+          :total="len"
         ></el-pagination>
       </div>
     </el-row>
@@ -25,6 +25,7 @@
 
 <script>
 import mySearch from "@/components/search/search";
+import api from "@/api/index.js"
 export default {
   data() {
     return {
@@ -45,6 +46,11 @@ export default {
       ]
     };
   },
+  computed:{
+    len(){
+      return this.topicList.length;
+    }
+  },
   components: {
     mySearch
   },
@@ -54,6 +60,11 @@ export default {
     } else {
       window.location.hash += "#1";
     }
+    console.log(1)
+    api.getTopicList().then(res=>{
+      this.topicList = res.data;
+      console.log(res.data)
+    })
   },
   methods: {
     changePage() {

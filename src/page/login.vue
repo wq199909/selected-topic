@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import api from '@/api/index.js'
 export default {
     data(){
         return {
@@ -25,13 +26,13 @@ export default {
             }else if(this.passWord == ''){
 
             }else{
-                console.log(this.loading)
-                setTimeout(()=>{
-                if(this.userId == 'U201714626' && this.passWord == '123456'){
+                api.login({
+                    userName : this.userId,
+                    passWord : this.passWord
+                }).then(res=>{
+                    console.log(res.data.userId)
                     this.loading = false;
-                }
-
-                },1000)
+                })
             }
         }
     },
@@ -40,5 +41,4 @@ export default {
 
 <style lang="scss" scope>
 @import '@/assets/css/login/login.scss';
-
 </style>
