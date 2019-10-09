@@ -18,17 +18,36 @@ function getCookie(cookieName) {
 }
 
 const state = {
-  userName: getCookie('userName') || ''
+  userName: getCookie('userName') || '',
+  userId: getCookie('userId') || '',
+  // userId: 'U201714626',
+  passWord: getCookie('passWord') || '',
+  topicList: [],
+  user: {},
+  log: false,
+  init: null
 }
 
 const mutations = {
   changeName(state, name) {
     state.userName = name
+  },
+  changeLog(state) {
+    state.log = !state.log
   }
 }
 
 const actions = {
 
+}
+
+const getters = {
+  log: state => {
+    return state.log
+  },
+  userId: state => {
+    return state.userId
+  }
 }
 
 export default new Vuex.Store({

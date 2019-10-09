@@ -29,4 +29,42 @@
             }
         }
     }
+    .dialog-bar{
+        z-index: 9999;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        opacity: .8;
+        .topic-content{
+            width: 300px;
+            padding: 20px;
+            position: absolute;
+            top: 100px;
+            left: calc(50% - 100px);
+            background-color: #fff;
+            opacity: 1;
+            border-radius: 5px;
+            .topic-name{
+                font-weight: bold;
+            }
+            .el-icon-close{
+                position: absolute;
+                right: 10px;
+                cursor: pointer;
+                &:hover{
+                    color: rgb(133, 194, 255);
+                }
+            }
+            .topic-msg{
+                padding-top: 10px;
+            }
+            .btn{
+                margin-top: 20px;
+                text-align: right;
+            }
+        }
+    }
 }

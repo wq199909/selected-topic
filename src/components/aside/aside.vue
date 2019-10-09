@@ -43,8 +43,16 @@ export default {
                     }
                 }
             }
+        },
+        initList(){
+            this.list.forEach(item=>item.active = false);
+            this.list[0].active = true;
         }
     },
+    mounted(){
+        this.$store.state.init = this.initList;
+        console.log(this.$store.state.init)
+    }
 }
 </script>
 

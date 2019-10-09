@@ -18,9 +18,13 @@ export default {
     },
     methods: {
         loadAll(){
-            return {
-
-            }
+          let arr = [];
+          for(let item of this.$store.state.topicList){
+            item.value = item.name;
+            arr.push(item);
+          }
+          // console.log(arr)
+            return arr;
         },
         querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants;
@@ -42,6 +46,7 @@ export default {
     },
     mounted() {
       this.restaurants = this.loadAll();
+      // console.log(this.restaurants)
     }
 }
 </script>

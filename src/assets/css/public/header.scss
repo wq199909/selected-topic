@@ -46,11 +46,22 @@
         position: absolute;
         right: 30px;
         z-index: 999;
+        text-decoration: none;
         cursor: pointer !important;
-        &.login-after{
+        &.el-dropdown{
             width: 7em;
+            color: black;
         }
     }
+    
+}
+
+.personal{
+    color: #606266 ;
+    text-decoration: none !important;
+}
+.personal:hover{
+    color: rgb(102, 177, 255)
 }
 @media (max-width:500px){
     .title{

@@ -6,7 +6,7 @@
     <el-row>
       <ul>
         <li v-for="item in topicList" :key="item.id">
-          <router-link :to="'/topic-'+item.id">{{item.name}}</router-link>
+          <el-button type="text" @click="showMsg(item)">{{item.name}}</el-button>
         </li>
       </ul>
     </el-row>
@@ -20,51 +20,71 @@
         ></el-pagination>
       </div>
     </el-row>
+    <template v-if="show">
+      <dialog-bar :topic="topic" @contentChangeShow="changeShow"></dialog-bar>
+    </template>
+    
+  <template v-if="log"> 
+    <my-login @logFalse="changeLog"></my-login>
+  </template>
   </div>
 </template>
-
 <script>
+import dialogBar from '@/components/public/dialogBar';
+import myLogin from '@/components/public/login';
 import mySearch from "@/components/search/search";
-import api from "@/api/index.js"
+import api from "@/api/index.js";
 export default {
   data() {
     return {
       currentPage: 1,
-      topicList: [
-        {
-          msg: "学生选题系统",
-          id: "100"
-        },
-        {
-          msg: "数独游戏",
-          id: "101"
-        },
-        {
-          msg: "口算出题软件",
-          id: "102"
-        }
-      ]
+      topicList: [],
+      show: false,
+      // log: false,
+      topic: {}
     };
   },
-  computed:{
-    len(){
+  computed: {
+    len() {
       return this.topicList.length;
+    },
+    log(){
+      return this.$store.state.log
     }
+      
   },
   components: {
-    mySearch
+    mySearch,
+    dialogBar,
+    myLogin
   },
   mounted() {
+    console.log(this.$store.state.userId !== "" && !this.$store.state.user.userId)
     if (window.location.hash.match(/\#[\w]*$/)) {
       window.location.hash.replace(/\#[\w]*$/, "#1");
     } else {
       window.location.hash += "#1";
     }
-    console.log(1)
-    api.getTopicList().then(res=>{
+    api.getTopicList().then(res => {
       this.topicList = res.data;
-      console.log(res.data)
-    })
+      this.$store.state.topicList = this.topicList;
+    });
+    if (this.$store.state.userId !== "" && !this.$store.state.user.userId) {
+      api
+        .login({
+          userName: this.$store.state.userId,
+          passWord: this.$store.state.passWord
+        })
+        .then(res => {
+          this.log = false;
+          if (res.data.userId) {
+            this.$store.state.user = res.data;
+            this.$store.state.log = false;
+          }
+        });
+    }else if(this.$store.state.userId == ""){
+      this.$store.state.log = true;
+    }
   },
   methods: {
     changePage() {
@@ -73,7 +93,17 @@ export default {
         /[\w]$/,
         this.currentPage
       );
-    }
+    },
+  showMsg(topic){
+    this.topic = topic;
+    this.show = true;
+  },
+  changeShow(){
+    this.show = false;
+  },
+  changeLog(){
+    this.$store.state.log = false;
+  }
   }
 };
 </script>

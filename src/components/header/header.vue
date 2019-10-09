@@ -15,28 +15,55 @@
     </el-col>
     <el-col :span="6"></el-col>
     <el-col :span="4">
-      <template v-if="login">
-        <div class="login login-after">欢迎您，{{userName}}</div>
+      <template v-if="!log">
+        <el-dropdown class="login">
+          <span class="el-dropdown-link">
+            {{userId}}
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item><router-link to="/personal" class="personal">个人中心</router-link></el-dropdown-item>
+            <el-dropdown-item><div @click="exit">退出</div></el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </template>
       <template v-else>
-        <router-link to="/login" class="login">登录</router-link>
+        <span class="login" @click="loginShow">登录</span>
       </template>
     </el-col>
   </el-row>
 </template>
-
 <script>
 export default {
+  data() {
+    return {
 
-    computed:{
-        userName(){
-            return this.$store.state.userName 
-        },
-        login(){
-            return this.userName !== ""
-        }
+    };
+  },
+  computed: {
+    log(){
+      return this.$store.state.log
+    },
+    userId(){
+      // console.log( this.$store.getters.userId)
+      return this.$store.state.userId
     }
-}
+  },
+  methods: {
+    exit(){
+      if(window.location.hash.indexOf('index')==-1){
+        this.$router.push({name: 'default'});
+        this.$store.state.init();
+      }
+      this.$store.state.log = true;
+      this.$store.state.user = {};
+      this.$store.state.userId = '';
+      console.log(this.$store.state.log)
+    },
+    loginShow(){
+      this.$store.state.log = true;
+    }
+  },
+};
 </script>
 
 <style>

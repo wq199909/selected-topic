@@ -25,11 +25,6 @@ export default new Router({
           path: '/suggest',
           name: 'suggest',
           component: () => import('@/page/suggest')
-        },
-        {
-          path: '/login',
-          name: 'login',
-          component: () => import('@/page/login')
         }
       ]
     }
