@@ -8,7 +8,7 @@
     <el-col :span="10">
       <div class="title">
         <span>选</span>
-        <span>课</span>
+        <span>题</span>
         <span>系</span>
         <span>统</span>
       </div>
