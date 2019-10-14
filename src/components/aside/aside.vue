@@ -42,16 +42,23 @@ export default {
                         item.active = false;
                     }
                 }
+                this.$store.state.isShow = false;
             }
         },
         initList(){
-            this.list.forEach(item=>item.active = false);
-            this.list[0].active = true;
+            this.list.forEach(item=>{
+                if(location.hash.match(item.hash)){
+                    item.active = true;
+                }else{
+                    item.active = false;
+                }
+            });
         }
     },
     mounted(){
-        this.$store.state.init = this.initList;
-        console.log(this.$store.state.init)
+        // this.$store.state.init = this.initList;
+        this.initList();
+        console.log(this.list)
     }
 }
 </script>

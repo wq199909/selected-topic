@@ -21,8 +21,11 @@
                     justify-content: center;
                     &:hover{
                         background-color: rgba(204, 204, 204, .5);
+                        span{
+                            color: rgb(133, 194, 255);
+                        }
                     }
-                    a{
+                    span{
                         text-decoration: none;
                         color: #000;
                     }
@@ -37,8 +40,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        background-color: #000;
-        opacity: .8;
+        background-color: rgba(0, 0, 0, .8);
         .topic-content{
             width: 300px;
             padding: 20px;
@@ -47,10 +49,7 @@
             left: 50%;
             transform: translate(-50%,0);
             background-color: #fff;
-            opacity: 1;
             border-radius: 5px;
-            max-height: 300px;
-            overflow: auto;
             .topic-name{
                 font-weight: bold;
             }
@@ -64,6 +63,9 @@
             }
             .topic-msg{
                 padding-top: 10px;
+                overflow: hidden scroll ;
+                overflow-wrap: break-word; 
+                max-height: 300px;
             }
             .btn{
                 margin-top: 20px;
@@ -71,4 +73,7 @@
             }
         }
     }
+}
+.el-message-box{
+    width: 300px !important;
 }

@@ -39,6 +39,17 @@
             animation-delay: .6s;
         }
     }
+    .el-icon-more{
+        display: inline-block;
+        height: 100%;
+        font-size: 20px;
+        padding: 20px;
+        position: relative;
+        cursor: pointer;
+        z-index: 999;
+        margin-left: -50%;
+        display: none;
+    }
     .login{
         height: 60px;
         width: 2em;
@@ -64,7 +75,9 @@
     color: rgb(102, 177, 255)
 }
 @media (max-width:500px){
-    .title{
-        // padding-left: 10px;
+    .header{
+        .el-icon-more{
+            display: block !important;
+        }
     }
 }

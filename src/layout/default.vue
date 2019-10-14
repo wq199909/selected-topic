@@ -4,7 +4,7 @@
         <my-header />
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="200px" :class="[isShow&&'show']">
         <my-aside />
       </el-aside>
       <el-container>
@@ -24,6 +24,11 @@ export default {
     components:{
         myHeader,
         myAside
+    },
+    computed:{
+      isShow(){
+        return this.$store.state.isShow;
+      }
     }
 };
 </script>

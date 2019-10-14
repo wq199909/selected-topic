@@ -6,6 +6,9 @@ var api = {
   },
   login(params) {
     return axios.post('/api/login.php', params)
+  },
+  sendSuggests(params) {
+    return axios.post('/api/sendSuggest.php', params)
   }
 }
 

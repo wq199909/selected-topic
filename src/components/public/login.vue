@@ -2,7 +2,10 @@
   <div class="my-login">
     <div class="content">
       <div class="form">
-        <h4 v-if="error" class="tips">{{error}}</h4>
+        <h4 v-if="error" class="tips">
+          <i class="el-icon-remove"></i>
+          {{error}}
+          </h4>
         <p>
           <span>账号登陆</span>
         </p>
@@ -18,6 +21,7 @@
           type="passWord"
           placeholder="密码"
           prefix-icon="el-icon-lock"
+          show-password
         ></el-input>
         <!-- <div class="foot">
           <a href="#">忘记密码?</a>
@@ -75,11 +79,11 @@ export default {
             this.$store.state.user = res.data.data;
             this.saveCookie("userName", res.data.data.userName, 1);
             this.saveCookie("userId", res.data.data.userId, 1);
-            this.saveCookie("passWord", res.data.data.psw, 1);
+            this.saveCookie("passWord", this.passWord, 1);
             this.$router.push("/index");
             this.$emit('logFalse');
           }else{
-            this.error = "账号或密码错误"
+            this.error = res.data.msg;
             return false;
           }
         });

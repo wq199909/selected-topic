@@ -5,8 +5,8 @@
     </el-row> -->
     <el-row>
       <ul>
-        <li v-for="item in topicList" :key="item.id">
-          <el-button type="text" @click="showMsg(item)">{{item.topicName}}</el-button>
+        <li v-for="item in topicList" :key="item.id" @click="showMsg(item)">
+          <el-button type="text">{{item.topicName}}</el-button>
         </li>
       </ul>
     </el-row>
@@ -82,8 +82,8 @@ export default {
         })
         .then(res => {
           this.log = false;
-          if (res.data.userId) {
-            this.$store.state.user = res.data;
+          if (res.data.data.status) {
+            this.$store.state.user = res.data.data;
             this.$store.state.log = false;
           }
         });

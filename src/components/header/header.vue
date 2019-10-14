@@ -13,7 +13,9 @@
         <span>统</span>
       </div>
     </el-col>
-    <el-col :span="6"></el-col>
+    <el-col :span="6">
+      <i class="el-icon-more" @click="showAside"></i>
+    </el-col>
     <el-col :span="4">
       <template v-if="!log">
         <el-dropdown class="login">
@@ -61,6 +63,10 @@ export default {
     },
     loginShow(){
       this.$store.state.log = true;
+    },
+    showAside(){
+      this.$store.state.isShow = !this.$store.state.isShow;
+      console.log(this.$store.state.isShow)
     }
   },
 };
