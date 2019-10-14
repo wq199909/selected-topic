@@ -62,18 +62,20 @@ export default {
       }
       api
         .login({
-          userName: this.userId,
+          userId: this.userId,
           passWord: this.passWord
         })
         .then(res => {
-          if (res.data.userId) {
-            this.$store.state.userId = res.data.userId;
-            this.$store.state.userName = res.data.userName;
-            this.$store.state.passWord = res.data.passWord;
-            this.$store.state.user = res.data;
-            this.saveCookie("userName", res.data.userName, 1);
-            this.saveCookie("userId", res.data.userId, 1);
-            this.saveCookie("passWord", res.data.psw, 1);
+          console.log(res)
+          if (res.data.status) {
+
+            this.$store.state.userId = res.data.data.userId;
+            this.$store.state.userName = res.data.data.userName;
+            this.$store.state.passWord = res.data.data.passWord;
+            this.$store.state.user = res.data.data;
+            this.saveCookie("userName", res.data.data.userName, 1);
+            this.saveCookie("userId", res.data.data.userId, 1);
+            this.saveCookie("passWord", res.data.data.psw, 1);
             this.$router.push("/index");
             this.$emit('logFalse');
           }else{

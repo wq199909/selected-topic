@@ -1,12 +1,12 @@
 <template>
   <div class="index">
-    <el-row>
+    <!-- <el-row>
       <my-search />
-    </el-row>
+    </el-row> -->
     <el-row>
       <ul>
         <li v-for="item in topicList" :key="item.id">
-          <el-button type="text" @click="showMsg(item)">{{item.name}}</el-button>
+          <el-button type="text" @click="showMsg(item)">{{item.topicName}}</el-button>
         </li>
       </ul>
     </el-row>
@@ -41,13 +41,11 @@ export default {
       topicList: [],
       show: false,
       // log: false,
-      topic: {}
+      topic: {},
+      len:0
     };
   },
   computed: {
-    len() {
-      return this.topicList.length;
-    },
     log(){
       return this.$store.state.log
     }
@@ -65,14 +63,21 @@ export default {
     } else {
       window.location.hash += "#1";
     }
-    api.getTopicList().then(res => {
-      this.topicList = res.data;
-      this.$store.state.topicList = this.topicList;
+    api.getTopicList({
+      num : this.currentPage
+    }).then(res => {
+      // this.topicList = res.data.data;
+      // console.log(res.data)
+      if(res.data.status){
+        this.len = res.data.msg;
+        this.topicList = res.data.data;
+        console.log(this.topicList)
+      }
     });
     if (this.$store.state.userId !== "" && !this.$store.state.user.userId) {
       api
         .login({
-          userName: this.$store.state.userId,
+          userId: this.$store.state.userId,
           passWord: this.$store.state.passWord
         })
         .then(res => {
@@ -93,6 +98,12 @@ export default {
         /[\w]$/,
         this.currentPage
       );
+    api.getTopicList({
+      num : this.currentPage
+    }).then(res => {
+      this.topicList = res.data.data;
+      console.log(res.data)
+    });
     },
   showMsg(topic){
     this.topic = topic;
@@ -103,6 +114,7 @@ export default {
   },
   changeLog(){
     this.$store.state.log = false;
+    console.log(this.$store.state.log)
   }
   }
 };
