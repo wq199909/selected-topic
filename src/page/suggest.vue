@@ -1,6 +1,14 @@
 <template>
-  <div class="suggest">
-    <form action>
+<div>
+<div class="suggest">
+    <div v-if="isTeacher">
+      <ul>
+        <li v-for="item in suggest" :key="item.id" @click="showMsg(item)">
+          <el-button type="text">{{item.title}}</el-button>
+        </li>
+      </ul>
+    </div>
+    <form action v-else>
       <div class="error">{{error}}</div>
       <el-input type="text" placeholder="请输入内容" v-model="text" maxlength="10" show-word-limit></el-input>
       <el-input
@@ -13,16 +21,29 @@
       <el-button type="primary" @click="submit">提交</el-button>
     </form>
   </div>
+    <template v-if="show">
+      <dialog-bar :topic="suggest" @contentChangeShow="changeShow"></dialog-bar>
+    </template>
+</div>
+  
+  
 </template>
 
 <script>
+import dialogBar from '@/components/public/dialogBar';
 import api from "@/api/index";
 export default {
+  components:{
+    dialogBar
+  },
   data() {
     return {
       text: "",
       textarea: "",
-      error: ""
+      error: "",
+      isTeacher: this.$store.state.user.isTeacher,
+      show: false,
+      suggest: [{id:1, title:2, content:2}]
     };
   },
   mounted() {
@@ -31,6 +52,13 @@ export default {
     }
   },
   methods: {
+    showMsg(topic){
+    this.topic = topic;
+    this.show = true;
+  },
+  changeShow(){
+    this.show = false;
+  },
     submit() {
       const h = this.$createElement;
       if (this.text == "") {

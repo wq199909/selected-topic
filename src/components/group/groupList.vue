@@ -6,7 +6,7 @@
       <el-table-column prop="captainName" label="队长名"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.$index, scope.row)" size="mini">加入</el-button>
+          <el-button @click="handleEdit(scope.$index, scope.row)" size="mini">{{isTeacher?'删除':'加入'}}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -17,8 +17,17 @@
 import api from "@/api/index.js";
 export default {
   props: ["groupList"],
+  data(){
+      return {
+          isTeacher: this.$store.state.user.isTeacher
+      }
+  },
   methods: {
     handleEdit(index, team) {
+    if(isTeacher){
+
+        return;
+    }
       if (this.$store.state.user.teamId) {
         this.$message("你已经加入了队伍，不可再次加入！");
       } else {

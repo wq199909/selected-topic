@@ -8,7 +8,7 @@
           </ul>-->
           <group-list :groupList="groupList"></group-list>
         </el-row>
-        <el-row>
+        <el-row >
           <div class="block">
             <el-pagination
               @current-change="changePage"
@@ -19,10 +19,10 @@
           </div>
         </el-row>
       </el-tab-pane>
-      <el-tab-pane label="创建队伍" name="second">
+      <el-tab-pane label="创建队伍" name="second" v-if="!isTeacher">
         <create-group></create-group>
       </el-tab-pane>
-      <el-tab-pane label="我的队伍" name="third">
+      <el-tab-pane label="我的队伍" name="third" v-if="!isTeacher">
         <my-group></my-group>
       </el-tab-pane>
     </el-tabs>
@@ -45,7 +45,8 @@ export default {
       activeName: "first",
       currentPage: 1,
       groupList: [],
-      len: 0
+      len: 0,
+      isTeacher: this.$store.state.user.isTeacher
     };
   },
   computed: {},

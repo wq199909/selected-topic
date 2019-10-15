@@ -2,6 +2,28 @@
     height: 100%;
     width: 100%;
     position: relative;
+    ul{
+        height: calc(100% - 20px);
+        padding: 10px;
+        li{
+            height: 10%;
+            border-bottom: 1px solid #aaa;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover{
+                background-color: rgba(204, 204, 204, .5);
+                span{
+                    color: rgb(133, 194, 255);
+                }
+            }
+            span{
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    }
     form{
         position: absolute;
         left: 50%;
@@ -29,4 +51,53 @@
 }
 .el-message{
     width: 100px !important;
+}
+.dialog-bar{
+    z-index: 9999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    .topic-content{
+        width: 300px;
+        padding: 20px;
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        transform: translate(-50%,0);
+        background-color: #fff;
+        border-radius: 5px;
+        .topic-name{
+            font-weight: bold;
+            &.el-input{
+                width: 200px;
+                display: inline-block;
+            }
+        }
+        .el-icon-close{
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+            &:hover{
+                color: rgb(133, 194, 255);
+            }
+        }
+        .topic-msg{
+            padding-top: 10px;
+            overflow: hidden auto ;
+            overflow-wrap: break-word; 
+            max-height: 300px;
+            
+            &.el-textarea{
+                width: 300px; 
+            }
+        }
+        .btn{
+            margin-top: 20px;
+            text-align: right;
+        }
+    }
 }
