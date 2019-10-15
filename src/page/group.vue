@@ -3,9 +3,10 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="队伍列表" name="first">
         <el-row>
-          <ul>
-            <li v-for="item in groupList" :key="item.id">{{item.name}}</li>
-          </ul>
+          <!-- <ul>
+            <li v-for="item in groupList" :key="item.id">{{item.teamName}}</li>
+          </ul>-->
+          <group-list :groupList="groupList"></group-list>
         </el-row>
         <el-row>
           <div class="block">
@@ -29,31 +30,45 @@
 </template>
 
 <script>
-import createGroup from '@/components/group/createGroup.vue';
-import myGroup from '@/components/group/myGroup.vue';
+import api from "@/api/index.js";
+import createGroup from "@/components/group/createGroup.vue";
+import myGroup from "@/components/group/myGroup.vue";
+import groupList from "@/components/group/groupList.vue";
 export default {
-  components:{
+  components: {
     createGroup,
-    myGroup
+    myGroup,
+    groupList
   },
   data() {
     return {
       activeName: "first",
       currentPage: 1,
-      groupList: [{ name: "404", id: 1 }, { name: "403", id: 2 }]
+      groupList: [],
+      len: 0
     };
   },
-  computed: {
-    len() {
-      return this.groupList.length;
-    }
-  },
+  computed: {},
   mounted() {
+    if (!this.$store.state.user.userId) {
+      this.$router.push("/index");
+    }
     if (window.location.hash.match(/\#[\w]*$/)) {
       window.location.hash.replace(/\#[\w]*$/, "#1");
     } else {
       window.location.hash += "#1";
     }
+    api
+      .getTeamList({
+        num: this.currentPage
+      })
+      .then(res => {
+        console.log(res.data);
+        if (res.data.status) {
+          this.len = res.data.msg;
+          this.groupList = res.data.data;
+        }
+      });
   },
   methods: {
     changePage() {
@@ -62,9 +77,20 @@ export default {
         /[\w]$/,
         this.currentPage
       );
+      api
+        .getTeamList({
+          num: this.currentPage
+        })
+        .then(res => {
+          console.log(res.data);
+          if (res.data.status) {
+            this.len = res.data.msg;
+            this.groupList = res.data.data;
+          }
+        });
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     }
   }
 };

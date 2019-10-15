@@ -43,7 +43,7 @@ export default {
     onSubmit(){
       if(this.form.name==''){
         this.$message('队伍不能为空！')
-      }else if(this.form.delivery && this.form.passWord){
+      }else if(this.form.delivery && this.form.passWord == ''){
         this.$message('开启加密时密码不能为空')
       }else{
         api.createTeam({

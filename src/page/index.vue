@@ -63,6 +63,7 @@ export default {
     } else {
       window.location.hash += "#1";
     }
+    this.$store.state.init();
     api.getTopicList({
       num : this.currentPage
     }).then(res => {
@@ -81,10 +82,10 @@ export default {
           passWord: this.$store.state.passWord
         })
         .then(res => {
-          this.log = false;
-          if (res.data.data.status) {
+          if (res.data.status) {
             this.$store.state.user = res.data.data;
             this.$store.state.log = false;
+            console.log(this.$store.state.log)
           }
         });
     }else if(this.$store.state.userId == ""){

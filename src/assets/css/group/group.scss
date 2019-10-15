@@ -1,62 +1,76 @@
-.group{
+.group {
+  height: 100%;
+
+  .el-tabs {
     height: 100%;
-    .el-tabs{
+    width: 100%;
+
+    .el-tabs__nav.is-top {
+      width: 100%;
+
+      #tab-first,
+      #tab-second,
+      #tab-third {
+        width: 33%;
+        text-align: center;
+      }
+    }
+
+    .el-tabs__content {
+      height: calc(100% - 40px);
+
+      .el-tab-pane {
         height: 100%;
-        width: 100%;
-        .el-tabs__nav.is-top{
-            width: 100%;
-            #tab-first,
-            #tab-second,
-            #tab-third{
-                width: 33%;
+
+        .el-row:nth-of-type(1) {
+          position: relative;
+          z-index: 999;
+          height: calc(100% - 40px);
+
+          .groupList,
+          .el-table {
+            height: 95%;
+            width: 360px;
+            margin: 0 auto;
+            overflow: hidden auto;
+            overflow-wrap: break-word;
+            th,td{
                 text-align: center;
             }
-        }
-        .el-tabs__content{
-            height: calc(100% - 40px);
-            .el-tab-pane{
-                height: 100%;
-                .el-row:nth-of-type(1){
-                    position: relative;
-                    z-index: 999;
-                    height: calc(100% - 40px);
-                    ul{                       
-                height: calc(100% - 20px);
-                padding: 10px;
-                        li{
-                            height: 10%; 
-                            border-bottom: 1px solid #aaa;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            &:hover{
-                                background-color: rgba(204, 204, 204, .5);
-                                color: rgb(133, 194, 255);
-                            }
-                        }
-                    }
-                }
-                .el-row:nth-of-type(2){
-                    text-align: center;
-                    height: 40px;
-                    line-height: 40px;
-                }
-                height: 100%;
-                .el-form{
-                    width: 300px;
-                    margin: 20px auto;
-                    .el-icon-warning-outline{
-                        color: rgb(244, 189, 0);
-                    }
-                }
-                .myGroup{
-                    .topic,.member{
-                        width: 80%;
-                        margin: 10px auto 0 auto;
-                    }
-                }
+            .el-table__body-wrapper {
+              cursor: pointer;
+              color: #409EFF;
             }
+
+          }
         }
+
+        .el-row:nth-of-type(2) {
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+        }
+
+        height: 100%;
+
+        .el-form {
+          width: 300px;
+          margin: 20px auto;
+
+          .el-icon-warning-outline {
+            color: rgb(244, 189, 0);
+          }
+        }
+
+        .myGroup {
+
+          .topic,
+          .member {
+            width: 80%;
+            margin: 10px auto 0 auto;
+          }
+        }
+      }
     }
+  }
 }

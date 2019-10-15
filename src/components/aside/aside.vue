@@ -56,9 +56,8 @@ export default {
         }
     },
     mounted(){
-        // this.$store.state.init = this.initList;
+        this.$store.state.init = this.initList;
         this.initList();
-        console.log(this.list)
     }
 }
 </script>

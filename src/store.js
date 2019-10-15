@@ -24,7 +24,7 @@ const state = {
   passWord: getCookie('passWord') || '',
   topicList: [],
   user: {},
-  log: false,
+  log: true,
   init: null,
   isShow: false
 }
