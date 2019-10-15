@@ -27,22 +27,22 @@
           z-index: 999;
           height: calc(100% - 40px);
 
-          .groupList,
-          .el-table {
-            height: 95%;
-            width: 360px;
-            margin: 0 auto;
-            overflow: hidden auto;
-            overflow-wrap: break-word;
-            th,td{
-                text-align: center;
-            }
-            .el-table__body-wrapper {
-              cursor: pointer;
-              color: #409EFF;
-            }
-
+          .groupList{
+              height: 100%;
+            .el-table {
+                overflow: auto;
+                height: 100% !important;
+                width: 100%;
+                th,td{
+                    text-align: center;
+                }
+                .el-table__body-wrapper {
+                  color: #409EFF;
+                }
+    
+              }
           }
+          
         }
 
         .el-row:nth-of-type(2) {

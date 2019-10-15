@@ -26,7 +26,9 @@ const state = {
   user: {},
   log: true,
   init: null,
-  isShow: false
+  isShow: false,
+  myTopicList: [],
+  teamMembers: []
 }
 
 const mutations = {

@@ -16,8 +16,14 @@ var api = {
   createTeam(params) {
     return axios.post('/api/createTeam.php', params)
   },
-  getGroupMsg(params){
+  getGroupMsg(params) {
     return axios.post('/api/getTeamMsg.php', params)
+  },
+  isEncryption(params) {
+    return axios.post('/api/isEncryption.php', params);
+  },
+  addTeam(params) {
+    return axios.post('/api/addTeam.php', params);
   }
 }
 

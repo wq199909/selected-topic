@@ -12,7 +12,7 @@
         <span>选题</span>
         <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
       </div>
-      <div v-for="o in topicList" :key="o.topicId" class="text item">{{'列表内容 ' + o }}</div>
+      <div v-for="o in topicList" :key="o.topicId" class="text item">{{'列表内容 ' + o.topicName }}</div>
     </el-card>
   </div>
 </template>
@@ -23,8 +23,14 @@ import api from "@/api/index.js";
 export default {
   data(){
     return {
-      topicList: [],
-      teamMembers: []
+    }
+  },
+  computed:{
+    topicList(){
+      return this.$store.state.myTopicList;
+    },
+    teamMembers(){
+      return this.$store.state.teamMembers;
     }
   },
   mounted(){
@@ -32,9 +38,8 @@ export default {
       teamId: this.$store.state.user.teamId
     }).then(res=>{
       if(res.data.status){
-        this.topicList = res.data.data.topic;
-        this.teamMembers = res.data.data.teamMember;
-        console.log(this.topicList, this.teamMembers)
+        this.$store.state.myTopicList = res.data.data.topic;
+        this.$store.state.teamMembers = res.data.data.teamMember;
       }
     })
   }
