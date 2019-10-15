@@ -42,6 +42,20 @@
                     height: 40px;
                     line-height: 40px;
                 }
+                height: 100%;
+                .el-form{
+                    width: 300px;
+                    margin: 20px auto;
+                    .el-icon-warning-outline{
+                        color: rgb(244, 189, 0);
+                    }
+                }
+                .myGroup{
+                    .topic,.member{
+                        width: 80%;
+                        margin: 10px auto 0 auto;
+                    }
+                }
             }
         }
     }
