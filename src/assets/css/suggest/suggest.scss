@@ -1,34 +1,53 @@
+.suggest-wrapper{
+    height: 100%;
+    width: 100%;
+}
 .suggest{
     height: 100%;
     width: 100%;
     position: relative;
-    ul{
-        height: calc(100% - 20px);
-        padding: 10px;
-        li{
-            height: 10%;
-            border-bottom: 1px solid #aaa;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            &:hover{
-                background-color: rgba(204, 204, 204, .5);
-                span{
-                    color: rgb(133, 194, 255);
-                }
+    div{
+        height: 100%;
+        width: 100%;
+        .el-row{
+            text-align: center;
+            // &:nth-child(1),
+            &:nth-child(2){
+                height: 40px;
             }
-            span{
-                text-decoration: none;
-                color: #000;
+            &:nth-child(1){
+                height: calc(100% - 40px);
+                ul{
+                    height: calc(100% - 20px);
+                    padding: 10px;
+                    li{
+                        height: 10%;
+                        border-bottom: 1px solid #aaa;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover{
+                            background-color: rgba(204, 204, 204, .5);
+                            span{
+                                color: rgb(133, 194, 255);
+                            }
+                        }
+                        span{
+                            text-decoration: none;
+                            color: #000;
+                        }
+                    }
+                }
             }
         }
     }
+    
     form{
         position: absolute;
         left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        top: 100px;
+        transform: translate(-50%, 0);
         display: flex;
         flex-direction: column;
         .error{
@@ -53,7 +72,7 @@
     width: 100px !important;
 }
 .dialog-bar{
-    z-index: 9999;
+    z-index: 999;
     position: absolute;
     left: 0;
     top: 0;

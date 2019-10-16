@@ -3,6 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="队伍列表" name="first">
         <el-row>
+          <el-button @click="begin" v-if="$store.state.user.isTeacher">开始计算</el-button>
           <!-- <ul>
             <li v-for="item in groupList" :key="item.id">{{item.teamName}}</li>
           </ul>-->
@@ -92,6 +93,11 @@ export default {
     },
     handleClick(tab, event) {
       // console.log(tab, event);
+    },
+    begin(){
+      api.sort({}).then(res=>{
+
+      })
     }
   }
 };

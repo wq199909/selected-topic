@@ -13,12 +13,23 @@
 export default {
     data(){
         return {
-            list: [
+            list1: [
+                {msg:'题目列表', active: true, hash:'/index'},
+                {msg:'分组', active: false, hash:'/group'},
+                {msg:'建议区', active: false, hash:'/suggest'},
+                {msg: '添加题目', active: false, hash: '/addTopic'}
+            ],
+            list2: [
                 {msg:'题目列表', active: true, hash:'/index'},
                 {msg:'分组', active: false, hash:'/group'},
                 {msg:'建议区', active: false, hash:'/suggest'}
             ]
         }
+    },
+    computed:{
+        list(){
+            return this.$store.state.user.isTeacher ? this.list1 : this.list2
+        } 
     },
     // mounted(){
     //     let hash = window.location.hash.match(/\/[\w]*$/)[0];

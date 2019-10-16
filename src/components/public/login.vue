@@ -5,7 +5,7 @@
         <h4 v-if="error" class="tips">
           <i class="el-icon-remove"></i>
           {{error}}
-          </h4>
+        </h4>
         <p>
           <span>账号登陆</span>
         </p>
@@ -38,6 +38,7 @@
 
 <script>
 import api from "@/api/index.js";
+import { parse } from "path";
 export default {
   data() {
     return {
@@ -70,9 +71,34 @@ export default {
           passWord: this.passWord
         })
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.data.status) {
-
+            if (!res.data.data.luckyNum && !res.data.data.isTeacher) {
+                this.$prompt(
+                  "幸运数字将影响你选题权重且只能输入一次，如果未输入可以在下次登录时输入",
+                  "幸运数字",
+                  {
+                    confirmButtonText: "确定",
+                    // cancelButtonText: "取消",
+                    inputPattern: /[0-9]+/,
+                    inputErrorMessage: "请输入正整数"
+                  }
+                )
+                  .then(({ value }) => {
+                    if (!isNaN(parseInt(value))) {
+                      api
+                        .setLuckyNum({
+                          luckyNum: parseInt(value),
+                          userId: res.data.data.userId
+                        })
+                        .then(res => {
+                          key = false;
+                        });
+                    }
+                  })
+                  .catch(() => {});
+              }
+            
             this.$store.state.userId = res.data.data.userId;
             this.$store.state.userName = res.data.data.userName;
             this.$store.state.passWord = res.data.data.passWord;
@@ -81,8 +107,8 @@ export default {
             this.saveCookie("userId", res.data.data.userId, 1);
             this.saveCookie("passWord", this.passWord, 1);
             this.$router.push("/index");
-            this.$emit('logFalse');
-          }else{
+            this.$emit("logFalse");
+          } else {
             this.error = res.data.msg;
             return false;
           }

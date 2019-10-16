@@ -25,6 +25,11 @@ export default new Router({
           path: '/suggest',
           name: 'suggest',
           component: () => import('@/page/suggest')
+        },
+        {
+          path: '/addTopic',
+          name: 'addTopic',
+          component: () => import('@/page/addTopic')
         }
       ]
     }

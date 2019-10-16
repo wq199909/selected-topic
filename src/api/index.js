@@ -23,7 +23,40 @@ var api = {
     return axios.post('/api/isEncryption.php', params);
   },
   addTeam(params) {
-    return axios.post('/api/addTeam.php', params);
+    return axios.post('/api/addTeam.php', params)
+  },
+  chooseTopic(params) {
+    return axios.post('/api/chooseTopic.php', params)
+  },
+  getAdvice(params) {
+    return axios.post('api/getAdvice.php', params)
+  },
+  deleteTopic(params) {
+    return axios.post('api/deleteTopic.php', params)
+  },
+  deleteAdvice(params) {
+    return axios.post('api/deleteAdvice.php', params)
+  },
+  deleteTeam(params) {
+    return axios.post('api/deleteTeam.php', params)
+  },
+  destroyTeam(params) {
+    return axios.post('api/destroyTeam.php', params)
+  },
+  quitTeam(params) {
+    return axios.post('api/quitTeam.php', params)
+  },
+  addTopic(params) {
+    return axios.post('api/addTopic.php', params)
+  },
+  cancelTopic(params) {
+    return axios.post('api/cancelTopic.php', params)
+  },
+  sort(params) {
+    return axios.post('api/sort.php', params)
+  },
+  setLuckyNum(params) {
+    return axios.post('api/setLuckyNum', params);
   }
 }
 

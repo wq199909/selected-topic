@@ -1,8 +1,5 @@
 <template>
   <div class="index">
-    <!-- <el-row>
-      <my-search />
-    </el-row> -->
     <el-row>
       <ul>
         <li v-for="item in topicList" :key="item.id" @click="showMsg(item)">

@@ -4,9 +4,13 @@
       <el-table-column prop="teamId" label="队伍Id"></el-table-column>
       <el-table-column prop="teamName" label="队名"></el-table-column>
       <el-table-column prop="captainName" label="队长名"></el-table-column>
+      <el-table-column prop="topic[topicName]" label="最终确定题"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.$index, scope.row)" size="mini">{{isTeacher?'删除':'加入'}}</el-button>
+          <el-button
+            @click="handleEdit(scope.$index, scope.row)"
+            size="mini"
+          >{{isTeacher?'删除':'加入'}}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -17,17 +21,40 @@
 import api from "@/api/index.js";
 export default {
   props: ["groupList"],
-  data(){
-      return {
-          isTeacher: this.$store.state.user.isTeacher
-      }
+  data() {
+    return {
+      isTeacher: this.$store.state.user.isTeacher
+    };
   },
   methods: {
     handleEdit(index, team) {
-    if(isTeacher){
-
+      if (this.isTeacher) {
+        this.$confirm("你确定删除该队伍吗?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
+          .then(() => {
+            api
+              .deleteTeam({
+                teamId: team.teamId
+              })
+              .then(res => {
+                this.$message({
+                  type: "info",
+                  message: "成功删除"
+                });
+                // this.groupList = res.data.data;
+              });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消"
+            });
+          });
         return;
-    }
+      }
       if (this.$store.state.user.teamId) {
         this.$message("你已经加入了队伍，不可再次加入！");
       } else {
@@ -53,6 +80,7 @@ export default {
                       if (res.data.status) {
                         this.$message(res.data.msg);
                         this.$store.state.user.teamId = team.teamId;
+                        console.log(this.$store.state.user)
                       } else {
                         this.$message(res.data.msg);
                       }
@@ -82,8 +110,9 @@ export default {
                       .then(res => {
                         if (res.data.status) {
                           this.$store.state.myTopicList = res.data.data.topic;
-                          this.$store.state.teamMembers = res.data.data.teamMember;
-                         console.log(this.$store.state.myTopicList)
+                          this.$store.state.teamMembers =
+                            res.data.data.teamMember;
+                          console.log(this.$store.state.myTopicList);
                         }
                       });
                   } else {
