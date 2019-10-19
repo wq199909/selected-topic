@@ -30,7 +30,8 @@ export default {
         { msg: "建议区", active: false, hash: "/suggest" },
         { msg: "添加题目", active: false, hash: "/addTopic" },
         { msg: "设置", active: false, hash: "/end" },
-        { msg: "成员", active: false, hash: "/userList" }
+        { msg: "成员", active: false, hash: "/userList" },
+        { msg: "添加成员", active: false, hash: "/addAccount" }
       ]
     };
   },

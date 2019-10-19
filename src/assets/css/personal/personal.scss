@@ -4,6 +4,15 @@
     box-sizing: border-box;
     padding: 20px;
     .el-form {
+        .el-form-item{
+            position: relative;
+            z-index: 999;
+            left: 40%;
+            transform: translate(-50%, 0);
+
+            width: 320px;
+            // text-align: center;
+        }
         .el-input,
         .el-button {
         display: inline-block;

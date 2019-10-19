@@ -8,19 +8,24 @@
     text-align: center;
     .el-row{
         width: 100%;
+        box-sizing: border-box;
     }
-    .el-col{
+    label{
+        float: left;
+        
         position: relative;
         left: 50%;
-        transform: translate(-50%, 0);
-        width: 320px;
-        label{
-            float: left;
-        }
-        // text-align: center;
+        transform: translate(-170%, 0);
     }
     .el-button{
         // margin: 0 auto;
         width: 320px;
     }
+}
+@media (max-width: 500px){
+    .end{
+    label{
+        padding-left: 30px ;
+    }
+}
 }

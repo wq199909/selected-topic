@@ -45,6 +45,11 @@ export default new Router({
           path: '/personal',
           name: 'personal',
           component: () => import('@/page/personal')
+        },
+        {
+          path: '/addAccount',
+          name: 'addAccount',
+          component: () => import('@/page/addAccount')
         }
       ]
     }

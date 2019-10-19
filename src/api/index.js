@@ -69,7 +69,23 @@ var api = {
   },
   setEndTime(params) {
     return axios.post('api/setEndTime.php', params)
+  },
+  updateinfo(params) {
+    return axios.post('api/updateinfo.php', params)
+  },
+  addAccount(params) {
+    return axios.post('api/addAccount.php', params)
+  },
+  cleanStudent(params) {
+    return axios.post('api/cleanStudent.php', params)
+  },
+  getAllAccount(params){
+    return axios.post('api/getAllaccount.php', params)
+  },
+  deleteAccount(params){
+    return axios.post('api/deleteAccount.php', params)
   }
+
 }
 
 export default api

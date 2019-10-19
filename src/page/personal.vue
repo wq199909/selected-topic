@@ -40,7 +40,19 @@ export default {
   },
   methods:{
     submit(){
-      
+      api.updateinfo({
+        userId: this.form.userId,
+        qq: this.form.qq,
+        class: this.form.class,
+        passWord: this.form.passWord
+      }).then(res=>{
+        if(res.data.data){
+          this.$message({
+            type: 'info',
+            message: res.data.msg
+          })
+        }
+      })
     }
   },
   mounted() {

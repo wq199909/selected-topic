@@ -125,7 +125,7 @@ export default {
       // console.log(tab, event);
     },
     clear() {
-      this.$confirm("你是否确认要清空题目?", "提示", {
+      this.$confirm("你是否确认要清空队伍?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"

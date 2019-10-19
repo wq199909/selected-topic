@@ -76,7 +76,7 @@ export default {
             if (!res.data.data.luckyNum && !res.data.data.isTeacher) {
                 this.$prompt(
                   "幸运数字将影响你选题权重且只能输入一次，如果未输入可以在下次登录时输入",
-                  "幸运数字",
+                  "幸运数字(1000以内正整数)",
                   {
                     confirmButtonText: "确定",
                     // cancelButtonText: "取消",
@@ -88,7 +88,7 @@ export default {
                     if (!isNaN(parseInt(value))) {
                       api
                         .setLuckyNum({
-                          luckyNum: parseInt(value),
+                          luckyNum: (parseInt(value) % 1000),
                           userId: res.data.data.userId
                         })
                         .then(res => {
