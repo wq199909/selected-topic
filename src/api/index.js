@@ -56,7 +56,19 @@ var api = {
     return axios.post('api/sort.php', params)
   },
   setLuckyNum(params) {
-    return axios.post('api/setLuckyNum', params);
+    return axios.post('api/setLuckyNum', params)
+  },
+  cleanTopic(params) {
+    return axios.post('api/cleanTopic.php', params)
+  },
+  cleanTeam(params) {
+    return axios.post('api/cleanTeam.php', params)
+  },
+  cleanAdvice(params) {
+    return axios.post('api/cleanAdvice.php', params)
+  },
+  setEndTime(params) {
+    return axios.post('api/setEndTime.php', params)
   }
 }
 

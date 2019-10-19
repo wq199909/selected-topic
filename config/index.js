@@ -12,8 +12,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{//此处并非一定和url一致。
-        target:'http://261s89112r.zicp.vip:20291',
-        // target: 'http://192.168.137.1',
+        // target:'http://261s89112r.zicp.vip:20291',
+        target: 'http://222.20.104.131:8080',
+        
         changeOrigin:true,//允许跨域
         pathRewrite:{
           '^/api': '/'

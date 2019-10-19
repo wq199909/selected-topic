@@ -1,6 +1,11 @@
 .group {
   height: 100%;
-
+  .clear{
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    z-index: 999;
+  }
   .el-tabs {
     height: 100%;
     width: 100%;

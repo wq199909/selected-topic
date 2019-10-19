@@ -17,7 +17,8 @@ export default {
                 {msg:'题目列表', active: true, hash:'/index'},
                 {msg:'分组', active: false, hash:'/group'},
                 {msg:'建议区', active: false, hash:'/suggest'},
-                {msg: '添加题目', active: false, hash: '/addTopic'}
+                {msg: '添加题目', active: false, hash: '/addTopic'},
+                {msg: '设置', active: false, hash: '/end'}
             ],
             list2: [
                 {msg:'题目列表', active: true, hash:'/index'},

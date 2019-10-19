@@ -8,7 +8,7 @@
       <div v-for="o in teamMembers" :key="o.userId" class="text item"><span>姓名:{{o.userName}}</span><span>学号:{{o.userId}}</span><span>QQ号:{{o.qq}}</span>
       </div>
     </el-card>
-    <el-card class="topic">
+    <el-card class="topic" v-if="topicTrue">
       <div slot="header" class="clearfix">
         <span>选题</span>
         <el-button style="float: right; padding: 3px 0" type="text"></el-button>
@@ -21,6 +21,16 @@
           </el-collapse-item>
         </el-collapse>
       </div>
+    </el-card>
+    <el-card class="topic" v-else>
+      <div slot="header" class="clearfix">
+        <span>最终选题</span>
+      </div>
+      <el-collapse>
+          <el-collapse-item :title="$store.state.user.topic.topicName" name="1">
+            <div>{{$store.state.user.topic.topic}}</div>
+          </el-collapse-item>
+        </el-collapse>
     </el-card>
   </div>
   <div v-else>
@@ -44,6 +54,9 @@ export default {
     dialogBar
   },
   computed: {
+    topicTrue(){
+      return this.$store.state.user.topic == null
+    },
     topicList() {
       return this.$store.state.myTopicList;
     },

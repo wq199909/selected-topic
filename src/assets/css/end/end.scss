@@ -1,0 +1,26 @@
+.end{
+    height: 300px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding-top: 100px;
+    text-align: center;
+    .el-row{
+        width: 100%;
+    }
+    .el-col{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 320px;
+        label{
+            float: left;
+        }
+        // text-align: center;
+    }
+    .el-button{
+        // margin: 0 auto;
+        width: 320px;
+    }
+}

@@ -66,11 +66,16 @@ export default {
         type: "warning"
       })
         .then(() => {
-          console.log(1);
+          if(this.topic.teamId){
+            this.$message({
+              type: 'info',
+              message: '该题以确定被选，不可再选'
+            })
+            this.close();
+            return;
+          }
           if (this.$store.state.user.teamId) {
-            console.log(111, this.$store.state.user.isCaptain);
             if (this.$store.state.user.isCaptain == 1) {
-              console.log(11111);
               api
                 .chooseTopic({
                   topicId: this.topic.id,

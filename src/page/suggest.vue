@@ -1,15 +1,23 @@
 <template>
   <div class="suggest-wrapper">
     <div class="suggest">
-      <div v-if="isTeacher">
+      <div v-if="isTeacher" class="teacher">
         <el-row>
+          <el-col :span="12">
+            <h2>建议列表</h2>
+          </el-col>
+          <el-col :span="12">
+            <el-button v-if="isTeacher" @click="clear">清空建议</el-button>
+          </el-col>
+        </el-row>
+        <el-row v-if="len">
           <ul>
             <li v-for="item in suggest" :key="item.id" @click="showMsg(item)">
               <el-button type="text">{{item.title}}</el-button>
             </li>
           </ul>
         </el-row>
-        <el-row>
+        <el-row v-if="len">
           <div class="block">
             <el-pagination
               @current-change="changePage"
@@ -19,6 +27,7 @@
             ></el-pagination>
           </div>
         </el-row>
+        <el-row v-else>暂无建议</el-row>
       </div>
       <form action v-else>
         <div>你对本课程有什么建议？</div>
@@ -61,7 +70,27 @@ export default {
     };
   },
   mounted() {
-    if (!this.$store.state.user.userId) {
+    if (this.$store.state.userId !== "" && !this.$store.state.user.userId) {
+      api
+        .login({
+          userId: this.$store.state.userId,
+          passWord: this.$store.state.passWord
+        })
+        .then(res => {
+          if (res.data.status) {
+            this.$store.state.user = res.data.data;
+            this.$store.state.log = false;
+            this.$store.state.init();
+            if(res.data.data.time.deadLine1<Date.parse(new Date())&&res.data.time.pass1!=1){
+              api.sort({}).then({
+
+              })
+            }else{
+              console.log('-->deadLine1')
+            }
+          }
+        });
+    } else if (this.$store.state.userId == "") {
       this.$router.push("/index");
     }
     if (this.$store.state.user.isTeacher) {
@@ -86,15 +115,18 @@ export default {
   methods: {
     changePage() {
       //   this.currentPage
-      window.location.hash = window.location.hash.replace(
-        /[\w]$/,
-        this.currentPage
-      );
-    api.getAdvice({
-      num : this.currentPage
-    }).then(res => {
-      this.suggest = res.data.data;
-    });
+      if (window.location.hash.match(/\#[\w]*$/)) {
+        window.location.hash.replace(/\#[\w]*$/, this.currentPage);
+      } else {
+        window.location.hash += "#" + this.currentPage;
+      }
+      api
+        .getAdvice({
+          num: this.currentPage
+        })
+        .then(res => {
+          this.suggest = res.data.data;
+        });
     },
     showMsg(topic) {
       this.topic = topic;
@@ -136,6 +168,27 @@ export default {
             console.log("发生了意外的错误");
           });
       }
+    },
+    clear() {
+      this.$confirm("你是否确认要清空建议?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          api.cleanAdvice({}).then(res => {
+            if (res.data.status) {
+              this.suggest = [];
+              this.len = 0;
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };

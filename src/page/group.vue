@@ -1,9 +1,9 @@
 <template>
   <div class="group">
+    <el-button class="clear" @click="clear" v-if="$store.state.user.isTeacher">清空队伍</el-button>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="队伍列表" name="first">
         <el-row>
-          <el-button @click="begin" v-if="$store.state.user.isTeacher">开始计算</el-button>
           <!-- <ul>
             <li v-for="item in groupList" :key="item.id">{{item.teamName}}</li>
           </ul>-->
@@ -52,7 +52,27 @@ export default {
   },
   computed: {},
   mounted() {
-    if (!this.$store.state.user.userId) {
+    if (this.$store.state.userId !== "" && !this.$store.state.user.userId) {
+      api
+        .login({
+          userId: this.$store.state.userId,
+          passWord: this.$store.state.passWord
+        })
+        .then(res => {
+          if (res.data.status) {
+            this.$store.state.user = res.data.data;
+            this.$store.state.log = false;
+            this.$store.state.init();
+            if(res.data.data.time.deadLine1<Date.parse(new Date())&&res.data.time.pass1!=1){
+              api.sort({}).then({
+
+              })
+            }else{
+              console.log('-->deadLine1')
+            }
+          }
+        });
+    }else if(this.$store.state.userId == ""){
       this.$router.push("/index");
     }
     if (window.location.hash.match(/\#[\w]*$/)) {
@@ -75,10 +95,11 @@ export default {
   methods: {
     changePage() {
       //   this.currentPage
-      window.location.hash = window.location.hash.replace(
-        /[\w]$/,
-        this.currentPage
-      );
+      if (window.location.hash.match(/\#[\w]*$/)) {
+      window.location.hash.replace(/\#[\w]*$/, this.currentPage);
+    } else {
+      window.location.hash += ('#'+this.currentPage);
+    }
       api
         .getTeamList({
           num: this.currentPage
@@ -94,10 +115,26 @@ export default {
     handleClick(tab, event) {
       // console.log(tab, event);
     },
-    begin(){
-      api.sort({}).then(res=>{
-
+    clear() {
+      this.$confirm("你是否确认要清空题目?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
+        .then(() => {
+          api.cleanTeam({}).then(res => {
+            if (res.data.status) {
+              this.groupList = [];
+              this.len = 0;
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };

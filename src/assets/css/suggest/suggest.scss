@@ -6,17 +6,17 @@
     height: 100%;
     width: 100%;
     position: relative;
-    div{
+    .teacher{
         height: 100%;
         width: 100%;
         .el-row{
             text-align: center;
-            // &:nth-child(1),
-            &:nth-child(2){
+            &:nth-child(1),
+            &:nth-child(3){
                 height: 40px;
             }
-            &:nth-child(1){
-                height: calc(100% - 40px);
+            &:nth-child(2){
+                height: calc(100% - 80px);
                 ul{
                     height: calc(100% - 20px);
                     padding: 10px;

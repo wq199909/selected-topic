@@ -30,6 +30,11 @@ export default new Router({
           path: '/addTopic',
           name: 'addTopic',
           component: () => import('@/page/addTopic')
+        },
+        {
+          path: '/end',
+          name: 'end',
+          component: () => import('@/page/end')
         }
       ]
     }

@@ -58,7 +58,27 @@ export default {
     }
   },
   mounted() {
-    if (!this.$store.state.user.userId) {
+    if (this.$store.state.userId !== "" && !this.$store.state.user.userId) {
+      api
+        .login({
+          userId: this.$store.state.userId,
+          passWord: this.$store.state.passWord
+        })
+        .then(res => {
+          if (res.data.status) {
+            this.$store.state.user = res.data.data;
+            this.$store.state.log = false;
+            this.$store.state.init();
+            if(res.data.data.time.deadLine1<Date.parse(new Date())&&res.data.time.pass1!=1){
+              api.sort({}).then({
+
+              })
+            }else{
+              console.log('-->deadLine1')
+            }
+          }
+        });
+    }else if(this.$store.state.userId == ""){
       this.$router.push("/index");
     }
   }
