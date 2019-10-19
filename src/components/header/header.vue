@@ -23,7 +23,6 @@
             {{userId}}
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item><router-link to="/personal" class="personal">个人中心</router-link></el-dropdown-item>
             <el-dropdown-item><div @click="exit">退出</div></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>

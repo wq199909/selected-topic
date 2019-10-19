@@ -35,6 +35,16 @@ export default new Router({
           path: '/end',
           name: 'end',
           component: () => import('@/page/end')
+        },
+        {
+          path: '/userList',
+          name: 'userList',
+          component: () => import('@/page/userList')
+        },
+        {
+          path: '/personal',
+          name: 'personal',
+          component: () => import('@/page/personal')
         }
       ]
     }

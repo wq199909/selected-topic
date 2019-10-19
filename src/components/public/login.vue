@@ -106,12 +106,21 @@ export default {
             this.saveCookie("userName", res.data.data.userName, 1);
             this.saveCookie("userId", res.data.data.userId, 1);
             this.saveCookie("passWord", this.passWord, 1);
-            if(res.data.data.time.deadLine1<Date.parse(new Date())&&res.data.time.pass1!=1){
-              api.sort({}).then({
-
-              })
-            }else{
-              console.log('-->deadLine1')
+            if (
+              res.data.data.time.deadLine2 < Date.parse(new Date()) &&
+              res.data.time.pass2 != 1
+            ) {
+              if (
+                res.data.data.time.deadLine1 < Date.parse(new Date()) &&
+                res.data.time.pass1 != 1
+              ) {
+                api.sort({}).then({});
+                console.log('-->deadLine2');
+              } else {
+                api.secondSort({}).then({});
+              }
+            } else {
+                console.log('-->deadLine1')
             }
             this.$router.push("/index");
             this.$emit("logFalse");

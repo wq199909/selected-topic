@@ -81,12 +81,21 @@ export default {
             this.$store.state.user = res.data.data;
             this.$store.state.log = false;
             this.$store.state.init();
-            if(res.data.data.time.deadLine1<Date.parse(new Date())&&res.data.time.pass1!=1){
-              api.sort({}).then({
-
-              })
-            }else{
-              console.log('-->deadLine1')
+            if (
+              res.data.data.time.deadLine2 < Date.parse(new Date()) &&
+              res.data.time.pass2 != 1
+            ) {
+              if (
+                res.data.data.time.deadLine1 < Date.parse(new Date()) &&
+                res.data.time.pass1 != 1
+              ) {
+                api.sort({}).then({});
+                console.log('-->deadLine2');
+              } else {
+                api.secondSort({}).then({});
+              }
+            } else {
+                console.log('-->deadLine1')
             }
           }
         });
