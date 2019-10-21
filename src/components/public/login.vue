@@ -73,6 +73,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status) {
+            this.$emit("logFalse");
             if (!res.data.data.luckyNum && !res.data.data.isTeacher) {
                 this.$prompt(
                   "幸运数字将影响你选题权重且只能输入一次，如果未输入可以在下次登录时输入",
@@ -108,11 +109,11 @@ export default {
             this.saveCookie("passWord", this.passWord, 1);
             if (
               res.data.data.time.deadLine2 < Date.parse(new Date()) &&
-              res.data.time.pass2 != 1
+              res.data.data.time.pass2 != 1
             ) {
               if (
                 res.data.data.time.deadLine1 < Date.parse(new Date()) &&
-                res.data.time.pass1 != 1
+                res.data.data.time.pass1 != 1
               ) {
                 api.sort({}).then({});
                 console.log('-->deadLine2');
@@ -123,7 +124,6 @@ export default {
                 console.log('-->deadLine1')
             }
             this.$router.push("/index");
-            this.$emit("logFalse");
           } else {
             this.error = res.data.msg;
             return false;

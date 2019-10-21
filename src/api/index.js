@@ -79,11 +79,14 @@ var api = {
   cleanStudent(params) {
     return axios.post('api/cleanStudent.php', params)
   },
-  getAllAccount(params){
+  getAllAccount(params) {
     return axios.post('api/getAllaccount.php', params)
   },
-  deleteAccount(params){
+  deleteAccount(params) {
     return axios.post('api/deleteAccount.php', params)
+  },
+  secondSort(params) {
+    return axios.post('api/secondSort.php', params)
   }
 
 }

@@ -45,11 +45,11 @@ export default {
             this.$store.state.init();
             if (
               res.data.data.time.deadLine2 < Date.parse(new Date()) &&
-              res.data.time.pass2 != 1
+              res.data.data.time.pass2 != 1
             ) {
               if (
                 res.data.data.time.deadLine1 < Date.parse(new Date()) &&
-                res.data.time.pass1 != 1
+                res.data.data.time.pass1 != 1
               ) {
                 api.sort({}).then({});
                 console.log('-->deadLine2');
